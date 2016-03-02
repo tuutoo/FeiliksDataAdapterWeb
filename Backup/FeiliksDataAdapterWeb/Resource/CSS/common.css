@@ -1,0 +1,107 @@
+@charset "utf-8";
+html {overflow:hidden;background:#fff; height:100%}
+body {height:100%;margin:0;font:12px/1.5 Arial,Tahoma,Helvetica,sans-serif;color:#333; padding:0;-webkit-text-size-adjust:none}
+form, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5,p{margin:0;padding:0;list-style:none;}
+input,select,option{ font-family:Arial, Helvetica, sans-serif; font-size:12px}
+textarea{ resize:vertical;}
+i,cite,em{font-style:normal}
+a {	text-decoration:none;color:#617789}
+a:hover {text-decoration:underline;color:#3d5569}
+a img {border:none}
+a * {cursor:pointer}
+.fl {float:left}
+.fr {float:right}
+.tl {text-align:left}
+.tc {text-align:center}
+.tr {text-align:right}
+.bold {font-weight:bold}
+.clear {clear:both}
+.nowrap {white-space:nowrap}
+.f14{ font-size:14px}
+.ico,.ico15 {display:inline-block;width:20px;height:20px;margin-right:1px;vertical-align:middle;overflow:hidden; background-image:url(../images/c_ico.png)}
+.server_state{ background-position:-60px 0}
+.we_point{ background-position:-20px 0}
+.level{ background-position:-40px 0}
+.vip_ico{ background-position:-60px -20px}
+.my_weinfo{ background-position:-80px 0}
+.ico_comment{background-position:-100px 0}
+.ico_fav{background-position:-100px -20px}
+.ico_share{background-position:-80px -20px}
+.ico_upload{background-position:-120px -20px}
+.ico_edit{background-position:-120px 0}
+.ico_view{background-position:-140px 0}
+.ico_complete{background-position:-160px 0}
+.ico_delete{background-position:-140px -20px}
+
+.ico15{ width:15px; height:15px; background-image:url(../images/ico15.png)}
+.file_ico{display:inline-block;width:20px;height:20px;margin-right:5px;vertical-align:middle;overflow:hidden; background-image:url(../images/file_ico.png)}
+.unknow,.pop_box_main .pop_right .unknow,#read .list .unknow,#downloadLink_confirm .unknow{ background-position:0 0}
+.video,.pop_box_main .pop_right .video,#read .list .video,#downloadLink_confirm .video{ background-position:-20px -20px}
+.music,.pop_box_main .pop_right .music,#read .list .music,#downloadLink_confirm .music{ background-position:0 -40px}
+.img,.pop_box_main .pop_right .img,#read .list .img,#downloadLink_confirm .img{ background-position:-20px 0}
+.php,.pop_box_main .pop_right .php,#read .list .php,#downloadLink_confirm .php{ background-position:0 -60px}
+.rar,.zip,.pop_box_main .pop_right .rar,.pop_box_main .pop_right .zip,#read .list .rar,#read .list .zip,#downloadLink_confirm .rar,#downloadLink_confirm .zip{ background-position:-40px 0}
+.ppt,.pop_box_main .pop_right .ppt,#read .list .ppt,#downloadLink_confirm .ppt{ background-position:-60px 0}
+.psd,.pop_box_main .pop_right .psd,#read .list .psd,#downloadLink_confirm .psd{ background-position:0 -20px}
+.ai,.pop_box_main .pop_right .ai,#read .list .ai,#downloadLink_confirm .ai{ background-position:-40px -20px}
+.excel,.pop_box_main .pop_right .excel,#read .list .excel,#downloadLink_confirm .excel{ background-position:-20px -60px}
+.access,.pop_box_main .pop_right .access,#read .list .access,#downloadLink_confirm .access{ background-position:-60px -20px}
+.txt,.pop_box_main .pop_right .txt,#read .list .txt,#downloadLink_confirm .txt{ background-position:-20px -40px}
+.flash,.pop_box_main .pop_right .flash,#read .list .flash,#downloadLink_confirm .flash{ background-position:-40px -60px}
+.iso,.pop_box_main .pop_right .iso,#read .list .iso,#downloadLink_confirm .iso{ background-position:0 -120px}
+.pdf,.pop_box_main .pop_right .pdf,#read .list .pdf,#downloadLink_confirm .pdf{ background-position:-40px -40px}
+.brush,.pop_box_main .pop_right .brush,#read .list .brush,#downloadLink_confirm .brush{ background-position:-60px -60px}
+.linux,.pop_box_main .pop_right .linux,#read .list .linux,#downloadLink_confirm .linux{ background-position:-60px -40px}
+.word,.pop_box_main .pop_right .word,#read .list .word,#downloadLink_confirm .word{ background-position:-20px -80px}
+.office,.pop_box_main .pop_right .office,#read .list .office,#downloadLink_confirm .office{ background-position:0 -80px}
+.freehand,.pop_box_main .pop_right .freehand,#read .list .freehand,#downloadLink_confirm .freehand{ background-position:-40px -100px}
+.csharp,.pop_box_main .pop_right .csharp,#read .list .csharp,#downloadLink_confirm .csharp{ background-position:0 -100px}
+.cplus,.pop_box_main .pop_right .cplus,#read .list .cplus,#downloadLink_confirm .cplus{ background-position:-20px -100px}
+.vb,.pop_box_main .pop_right .vb,#read .list .vb,#downloadLink_confirm .vb{ background-position:-60px -100px}
+.data,.pop_box_main .pop_right .data,#read .list .data,#downloadLink_confirm .data{ background-position:-40px -80px}
+.config,.pop_box_main .pop_right .config,#read .list .config,#downloadLink_confirm .config{background-position:-60px -80px}
+.fav_mark{ display:block; height:23px; width:23px; position:absolute; right:-1px; top:-1px; background:url(../images/header.png) no-repeat -292px -150px}
+
+#report_main{ padding:10px 0;}
+.report_label, .report_field{ float:left; line-height:20px;}
+.report_label{ width:80px;}
+.report_label label{ display:block; margin-bottom:10px; text-align:right;}
+#report_main .report_field{ margin-left:6px; width:290px;}
+#report_main .report_field select, #report_main .report_field textarea{ margin:0; padding:2px; width:96%;}
+#report_main .report_field textarea{ height:60px; margin-top:10px; overflow:auto;}
+#report_main .report_btns{ clear:both; margin:0 -10px; padding:10px 0 10px;}
+#report_main .report_btns p{ background:#eee; border-top:1px solid #ddd; padding:6px 0 6px 96px;}
+#report_main .report_btns input{ cursor:pointer; margin:0; padding:5px 12px;}
+.report_require{ color:red; padding-left:5px;}
+
+.btn {display:inline-block;position:relative;height:25px;padding:0 10px;line-height:25px;vertical-align:middle}
+.FlatButton {display:inline-block;position:relative;height:25px;padding:0 10px;line-height:25px;vertical-align:middle}
+.ml10{margin-left:10px}
+.m10{ margin:10px}
+.pr10{padding-right:10px}
+.org{color:#f90}
+.gray{ color:#ccc}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-family: Arial, Tahoma, Helvetica, sans-serif;
+}
+#loading{ background:#000 url(../images/loading-m.gif) no-repeat 50% 50%; height:80px; width:80px; position:absolute; left:50%; top:50%; margin:-40px 0 0 -40px; z-index:9999;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;filter:alpha(opacity=80);	-moz-opacity:0.8;	-khtml-opacity: 0.8;	opacity: 0.8; display:none}
+.clearfix:after {content: ".";display: block;clear: both;visibility: hidden;line-height: 0;height: 0}
+ .clearfix {display: inline-block}
+ html[xmlns] .clearfix {display: block}
+ * html .clearfix {height: 1%}
+ .rateBold
+ {
+color:Red;
+font-weight:bold;
+     }
+     .rateRed
+     {
+         color:Red;
+font-weight:bold;
+         }
+.Tooltipcss
+{
+	 background-color:#D1E7F6;
+	}

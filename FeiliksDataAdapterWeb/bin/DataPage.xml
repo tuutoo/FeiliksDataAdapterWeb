@@ -1,0 +1,2888 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DataPage</name>
+    </assembly>
+    <members>
+        <member name="T:Sourcesoft.DataPage">
+            <summary>
+            基于数据绑定的页面通用方法
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.DataPage.Indx">
+            <summary>
+            当页的数据索引
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.DataPage.LoginUser">
+            <summary>
+            当前登录用户
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.DataPage.#ctor">
+            <summary>
+            构造类
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.DataPage.InitPage">
+            <summary>
+            手动初始化属性
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.DataPage.Dispose">
+            <summary>
+            析构并释放资源
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.DataPage.OnInit(System.EventArgs)">
+            <summary>
+            初始化
+            </summary>
+            <remarks>
+            先根据QueryString获取Indx值
+            在根据设置建立数据库联接并获取FormSetting
+            根据FormSetting获取表和默认值
+            出现错误时在页面生成错误提示
+            <list type="DataType1">获取页面所需要的所有表，@Indx为当前索引，@Now为当前时间，@Login为当前登录人，@SubIndx为当前页面子表索引</list>
+            <list type="DataType2">设置页面全局默认值增加@Table.Field项目，可以从对应的表中获取对应的字段。</list>
+            <list type="CON">连接字符串设置在AppSettings中的名字</list>
+            <list type="AutoData">自动数据</list>
+            <list type="FormSetting">FormSetting表</list>
+            <list type="FormDBType">数据方式SQL,OLE,ORA</list>
+            <list type="AutoRun">自动运行的程序</list>
+            <list type="LastRun">Onload结束时运行</list>
+            <list type="KeepTable">需要保存到ViewState的表</list>
+            </remarks>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.OnLoad(System.EventArgs)">
+            <summary>
+            重载方法，用于处理自动数据
+            </summary>
+            <remarks>
+            <list type="Loaded">完成绑定后的代码</list>
+            </remarks>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.FindControl(System.String)">
+            <summary>
+            遍历控件查找。
+            </summary>
+            <param name="id">控件ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.DataPage.OnPreRender(System.EventArgs)">
+            <summary>
+            用于保存表到客户端或Session
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.AddToDatas(System.Data.DataTable)">
+            <summary>
+            增加表到页面数据
+            </summary>
+            <param name="table">要增加的表</param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.SaveToTable(System.String,System.String,System.String)">
+            <summary>
+            回写方法默认所属行集为0
+            </summary>
+            <param name="tname">表名</param>
+            <param name="fname">字段名</param>
+            <param name="datavalue">值</param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.SaveToTable(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            回写方法
+            </summary>
+            <param name="tname">表名</param>
+            <param name="fname">字段名</param>
+            <param name="row">所属行</param>
+            <param name="datavalue">值</param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.GetFromTable(System.String,System.String)">
+            <summary>
+            获取表中的数据做绑定数据用默认行集为0
+            </summary>
+            <param name="tname">表名</param>
+            <param name="fname">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Sourcesoft.DataPage.GetFromTable(System.String,System.String,System.Int32)">
+            <summary>
+            获取表中的数据做绑定数据用
+            </summary>
+            <param name="tname">表名</param>
+            <param name="fname">字段名</param>
+            <param name="row">数据所属行</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Sourcesoft.DataPage.BindForm(System.Object,System.EventArgs)">
+            <summary>
+            界面（控件）绑定方法
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.ProcSQL(System.String)">
+            <summary>
+            替换所有sql中的@变量
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.DataPage.CheckExpressions(System.String,System.String)">
+            <summary>
+            处理表达式
+            </summary>
+            <param name="exp">要计算的表达式</param>
+            <param name="SubTable">包含子表名称</param>
+            <returns>表达式结果</returns>
+        </member>
+        <member name="M:Sourcesoft.DataPage.ShowMessages(System.String)">
+            <summary>
+            在页面上发出message
+            </summary>
+            <param name="Messages"></param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.AddHandlers(System.Web.UI.Control)">
+            <summary>
+            添加数据绑定句柄，按钮命令句柄，列表命令句柄
+            遍历所有控件，主要用于VB.Net的模式。
+            </summary>
+            <param name="cParent">要遍历的控件</param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.ButtonCommand(System.Object,System.Web.UI.WebControls.CommandEventArgs)">
+            <summary>
+            通用按钮命令
+            </summary>
+            <remarks>
+            CommandName为Update,Insert,Delete,Cancel,Search,Others
+            Insert和Update 时 CommandArgument用'|'分隔[要更新的数据库表名]|[获取数据用的页面表名]|[主表标志]并根据FormSetting获取更新时默认值其中包含@FlowNo选项
+            [主表标志]包括
+            	M或空是主表，直接Redirect
+            	false	不需要刷新
+            	refresh	表示子表，并刷新页面
+            	clean	刷新并清空页面，用于作废或删除操作
+            	以X开头，则后面的为保存条件，若条件对当前行计算为True则保存
+            	自定义消息 显示自定义消息并于显示后刷新
+            @FlowNo|[获取流水号设置所用的SQL]可根据所列的SQL获取流水号设置
+            </remarks>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.ClientRefresh(System.String)">
+            <summary>
+            客户端刷新，可以先显示Message再刷新页
+            </summary>
+            <param name="msg">要显示的消息，如果用|分隔则前一个表示索引，后一个表示消息。</param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.RunCommand(System.String,System.String,System.String,System.Object[],System.Boolean)">
+            <summary>
+            Call By Name
+            </summary>
+            <param name="name">使用的Dll名称</param>
+            <param name="cmd">使用的NameSpace和Class</param>
+            <param name="exc">使用的函数</param>
+            <param name="parms">函数所用的参数列表</param>
+            <param name="reflash">是否刷新</param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.GetFlowNo(System.String)">
+            <summary>
+            获取流水号
+            </summary>
+            <remarks>
+            流水号规则
+            [号头]可使用YYYYMMDD模式匹配日期
+            [最小值]字符串需要长度控制
+            [最大值]
+            [号尾]可使用YYYYMMDD模式匹配日期
+            [根据号头清零标志]
+            [流水号所在表名]
+            [流水号所在字段]
+            </remarks>
+            <param name="SettingString">流水号生成所用的设置字符串</param>
+            <returns>流水号</returns>
+        </member>
+        <member name="M:Sourcesoft.DataPage.GridCommand(System.Object,System.Web.UI.WebControls.DataGridCommandEventArgs)">
+            <summary>
+            通用DataGrid命令
+            CommandName 为Edit,Select,Delete 
+            CommandArgument用|分隔[单一数据所用页面表]|[删除数据的数据库表]
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.CreateSearchList(System.Web.UI.Control,Sourcesoft.ExControls.DataGridEx)">
+            <summary>
+            生成查询所用的列表和条件文本框
+            CommandName需要的设置Search|S|SQL
+            CommandArguments需要的设置SearchTable|ListRes
+            </summary>
+            <param name="ContainerSearch"></param>
+            <param name="List"></param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.AddTables(System.String,System.Data.DataTable,System.Collections.ArrayList@)">
+            <summary>
+            递归添加视图所用到的表
+            </summary>
+            <param name="tablename">表名称</param>
+            <param name="Setting">设置</param>
+            <param name="TableList">表集合</param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.AddColumn(System.Data.DataRow,Sourcesoft.ExControls.DataGridEx,System.String@,System.Collections.ArrayList@)">
+            <summary>
+            添加列到列表中
+            </summary>
+            <param name="r">列设置</param>
+            <param name="grid">增加列的Grid</param>
+            <param name="Fields">视图对应的列集合字符串</param>
+            <param name="TableList">对应的表集合</param>
+        </member>
+        <member name="M:Sourcesoft.DataPage.AddSearch(System.Web.UI.WebControls.Table,System.Data.DataRow,System.Data.DataTable@)">
+            <summary>
+            添加文本框到查询界面
+            </summary>
+            <param name="Container">生成条件的界面表</param>
+            <param name="r">设置</param>
+        </member>
+        <member name="P:Sourcesoft.DataPage.DataAccess">
+            <summary>
+            活动数据连结
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.DataPage.FormDBType">
+            <summary>
+            窗体数据类型
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.DataPage.AutoGetData">
+            <summary>
+            是否允许自动处理窗体数据，需要FormSetting支持
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.DataPage.ErrMessages">
+            <summary>
+            页面错误信息
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.DataPage.FormSetting">
+            <summary>
+            设定窗体设置的表
+            FormSetting表结构：ID,DataType,DataName,DataDescription
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.DataPage.ConnectionString">
+            <summary>
+            设置数据连接字符串
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.DataPage.FormDatas">
+            <summary>
+            页面所用到的数据集，包含窗体数据和字典数据
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.DataPage.SaveBack">
+            <summary>
+            是否将窗体数据回写入表
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.DataPage.Clean">
+            <summary>
+            是否清空当前页面，该命令只存在于当前无数据
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.DataPage.NoFlash">
+            <summary>
+            是否为不刷新模式
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.DataPage.DbTypes">
+            <summary>
+            窗体使用的数据类型
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.DataPage.DbTypes.SqlServer">
+            <summary>
+            使用SQL Server 连接
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.DataPage.DbTypes.OleDB">
+            <summary>
+            适用OleDB连接
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.DataPage.DbTypes.Oracle">
+            <summary>
+            适用Oracle连接
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.Login">
+            <summary>
+            登录界面
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.Login.btnLogin">
+            <summary>
+            登陆按钮
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.Login.btnChangePwd">
+            <summary>
+            更该密码按钮
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.Login.txtUserId">
+            <summary>
+            用户ID文本框
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.Login.txtPassword">
+            <summary>
+            用户密码文本框
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.Login.tr_np">
+            <summary>
+            新密码行
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.Login.txtNewPwd">
+            <summary>
+            新密码文本框
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.Login.tr_cp">
+            <summary>
+            确认密码行
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.Login.txtConfirmPwd">
+            <summary>
+            确认密码文本框
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.Login.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.Login.OnInit(System.EventArgs)">
+            <summary>
+            重载Init
+            获取基础设置
+            UserTable:用户检查用户属性的表名称
+            RightsTable:用于用户权限的表名称
+            CheckField:用于检查用户名称的字段名
+            EmployeeAllow:用于使用Addtion信息的表
+            AllowID:Addtion信息中存放用户Indx的字段
+            AllowCheck:Addtion信息中存放Addtion信息的字段
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.Login.OnLoad(System.EventArgs)">
+            <summary>
+            重载Load
+            确定检查密码或显示。
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.Login.SetLogin">
+            <summary>
+            设置登陆插件
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.Login.CheckUser(System.String,System.String,System.String)">
+            <summary>
+            检查用户登录信息
+            </summary>
+            <param name="uName">用户名称</param>
+            <param name="uPass">用户密码</param>
+            <param name="addation">客户端的附加信息</param>
+        </member>
+        <member name="M:Sourcesoft.Login.btnChangePwd_Click(System.Object,System.EventArgs)">
+            <summary>
+            密码变更按钮命令
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.Login.changePwd(System.String,System.String)">
+            <summary>
+            密码变更
+            </summary>
+            <param name="userID">用户名</param>
+            <param name="newPwd">密码</param>
+        </member>
+        <member name="M:Sourcesoft.Login.RegCheckPass">
+            <summary>
+            注册检查密码脚本
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.GetXML">
+            <summary>
+            根据设置获取查询结果
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.GetXML.#ctor">
+            <summary>
+            构造函数，对客户段请求自动返回一个XML格式文件
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.GetXML.OnLoad(System.EventArgs)">
+            <summary>
+            处理页面数据
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:Sourcesoft.ProgressHandler">
+            <summary>
+            Insert和Update表时处理事件委托
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.IDataAccess">
+            <summary>
+            通用数据访问
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.BeginTrans">
+            <summary>
+            开始一个事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.ComitTrans">
+            <summary>
+            提交事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.RoolbackTrans">
+            <summary>
+            事务回滚
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.GetTable(System.String)">
+            <summary>
+            获取数据表
+            </summary>
+            <param name="SQL">用于获取数据表的SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.GetTable(System.String,System.Collections.Hashtable)">
+            <summary>
+            获取数据表
+            </summary>
+            <param name="SQL">>用于获取数据表的SQL语句</param>
+            <param name="parms">参数集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Insert(System.String,System.Data.DataRow)">
+            <summary>
+            新增一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns>返回当前新增的数据索引</returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Insert(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            新增一条纪录
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns>返回当前新增的数据索引</returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Insert(System.String,System.Data.DataTable)">
+            <summary>
+            按照整个表做新增动作
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <returns>返回插入的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Update(System.String,System.Data.DataRow)">
+            <summary>
+            更新一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Update(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            更新一条纪录
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Update(System.String,System.Data.DataTable)">
+            <summary>
+            按照整个表做更新动作
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <returns>返回被更新的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Update(System.String,System.Data.DataTable,System.String)">
+            <summary>
+            按照整个表做更新动作
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <param name="IndxField">更新数据的索引列</param>
+            <returns>返回被更新的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Delete(System.String,System.Data.DataRow)">
+            <summary>
+            删除一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于删除纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns>返回是否删除成功</returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Delete(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            删除一条纪录
+            </summary>
+            <param name="TableName">用于删除纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns>返回是否删除成功</returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.ExecuteSql(System.String)">
+            <summary>
+            执行SQL语句
+            </summary>
+            <param name="SQL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.ExecuteSql(System.String,System.Collections.Hashtable)">
+            <summary>
+            执行SQL语句
+            </summary>
+            <param name="SQL"></param>
+            <param name="parms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.GetDataSet(System.String)">
+            <summary>
+            获取DataSet
+            </summary>
+            <param name="SQL">获取DataSet所用的SQL</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.GetDataSet(System.String,System.Collections.Hashtable)">
+            <summary>
+            获取DataSet
+            </summary>
+            <param name="SQL">获取DataSet所用的SQL</param>
+            <param name="parms">命令所用的参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.GetAllTables">
+            <summary>
+            获取数据库所有表和视图
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Break">
+            <summary>
+            强制终止按表添加和更新
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.IDataAccess.Despose">
+            <summary>
+            析构
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.IDataAccess.ErrMessages">
+            <summary>
+            获取错误信息
+            </summary>
+        </member>
+        <member name="E:Sourcesoft.IDataAccess.OnProgress">
+            <summary>
+            Insert和Update表时处理事件
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.CheckBoxColumn">
+            <summary>
+            包含CheckBox的列
+            使用DataField设置CheckBox对应的数据
+            使用EnabledField设置CheckBox是否可用的数据
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.CheckBoxColumn.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.CheckBoxColumn.InitializeCell(System.Web.UI.WebControls.TableCell,System.Int32,System.Web.UI.WebControls.ListItemType)">
+            <summary>
+            重载初始化
+            在当前网格中增加CheckBox
+            </summary>
+            <param name="cell"></param>
+            <param name="columnIndex"></param>
+            <param name="itemType"></param>
+        </member>
+        <member name="P:Sourcesoft.ExControls.CheckBoxColumn.DataField">
+            <summary>
+            CheckBox所属的数据列
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.CheckBoxColumn.EnabledField">
+            <summary>
+            控制可用性对应的数据字段
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.CheckBoxColumn.FilterText">
+            <summary>
+            过滤按钮名称
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.SqueColumn">
+            <summary>
+            序号列
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.SqueColumn.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.SqueColumn.InitializeCell(System.Web.UI.WebControls.TableCell,System.Int32,System.Web.UI.WebControls.ListItemType)">
+            <summary>
+            重载初始化
+            生成序号
+            </summary>
+            <param name="cell"></param>
+            <param name="columnIndex"></param>
+            <param name="itemType"></param>
+        </member>
+        <member name="T:Sourcesoft.ExControls.ImageColumn">
+            <summary>
+            图片列
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.SQLDataAccess">
+            <summary>
+            通用数据访问 For SQL Server
+            Create By Duck Lee 2005-4-15
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="cnString">用于数据联接的字符串</param>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.BeginTrans">
+            <summary>
+            开始一个事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.ComitTrans">
+            <summary>
+            提交事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.RoolbackTrans">
+            <summary>
+            事务回滚
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.GetTable(System.String)">
+            <summary>
+            获取数据表
+            </summary>
+            <param name="SQL">用于获取数据表的SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.GetTable(System.String,System.Collections.Hashtable)">
+            <summary>
+            获取数据表
+            </summary>
+            <param name="SQL">>用于获取数据表的SQL语句</param>
+            <param name="parms">参数集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.GetDataSet(System.String)">
+            <summary>
+            获取DataSet
+            </summary>
+            <param name="SQL">获取DataSet所用的SQL</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.GetDataSet(System.String,System.Collections.Hashtable)">
+            <summary>
+            获取DataSet
+            </summary>
+            <param name="SQL"></param>
+            <param name="parms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Insert(System.String,System.Data.DataRow)">
+            <summary>
+            新增一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns>返回当前新增的数据索引</returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Insert(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            新增一条纪录
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns>返回当前新增的数据索引</returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Insert(System.String,System.Data.DataTable)">
+            <summary>
+            按照整个表做新增动作
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <returns>返回插入的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Update(System.String,System.Data.DataRow)">
+            <summary>
+            更新一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Update(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            更新一条纪录
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Update(System.String,System.Data.DataTable)">
+            <summary>
+            按照整个表做更新动作
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <remarks>默认IndxField为"Indx"</remarks>
+            <returns>返回被更新的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Update(System.String,System.Data.DataTable,System.String)">
+            <summary>
+            按照整个表做更新动作
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <param name="IndxField">数据的索引列名称</param>
+            <returns>返回被更新的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Delete(System.String,System.Data.DataRow)">
+            <summary>
+            删除一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于删除纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns>返回是否删除成功</returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Delete(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            删除一条纪录
+            </summary>
+            <param name="TableName">用于删除纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns>返回是否删除成功</returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.ExecuteSql(System.String)">
+            <summary>
+            执行SQL语句
+            </summary>
+            <param name="SQL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.ExecuteSql(System.String,System.Collections.Hashtable)">
+            <summary>
+            执行SQL语句
+            </summary>
+            <param name="SQL"></param>
+            <param name="parms">参数集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Despose">
+            <summary>
+            析构
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Dispose">
+            <summary>
+            释放连接
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.SQLDataAccess.Break">
+            <summary>
+            强制终止按表添加和更新
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.SQLDataAccess.ErrMessages">
+            <summary>
+            当出现错误时返回错误提示字符串
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.SQLDataAccess.ActiveCN">
+            <summary>
+            返回当前数据联接
+            </summary>
+        </member>
+        <member name="E:Sourcesoft.SQLDataAccess.OnProgress">
+            <summary>
+            Insert和Update表时处理事件
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.GetADOXML">
+            <summary>
+            根据设置获取查询结果
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.GetADOXML.#ctor">
+            <summary>
+            构造函数，对客户段请求自动返回一个ADOXML格式文件
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.GetADOXML.OnLoad(System.EventArgs)">
+            <summary>
+            处理页面数据
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:Sourcesoft.OraDataAccess">
+            <summary>
+            通用数据访问
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="cnString">用于数据联接的字符串</param>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.GetTable(System.String)">
+            <summary>
+            获取数据表
+            </summary>
+            <param name="SQL">用于获取数据表的SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.GetTable(System.String,System.Collections.Hashtable)">
+            <summary>
+            获取数据表
+            </summary>
+            <param name="SQL">>用于获取数据表的SQL语句</param>
+            <param name="parms">参数集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Insert(System.String,System.Data.DataRow)">
+            <summary>
+            新增一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns>返回当前新增的数据索引</returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Insert(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            新增一条纪录
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns>返回当前新增的数据索引</returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Insert(System.String,System.Data.DataTable)">
+            <summary>
+            按照整个表做新增动作
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <returns>返回插入的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Update(System.String,System.Data.DataTable)">
+            <summary>
+            按照整个表做更新动作
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <returns>返回被更新的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Update(System.String,System.Data.DataTable,System.String)">
+            <summary>
+            按照整个表做更新动作
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <param name="IndxField">更新表的索引列</param>
+            <returns>返回被更新的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Update(System.String,System.Data.DataRow)">
+            <summary>
+            更新一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Update(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            更新一条纪录
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Delete(System.String,System.Data.DataRow)">
+            <summary>
+            删除一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于删除纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns>返回是否删除成功</returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Delete(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            删除一条纪录
+            </summary>
+            <param name="TableName">用于删除纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns>返回是否删除成功</returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Despose">
+            <summary>
+            析构
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Break">
+            <summary>
+            强制终止按表添加和更新
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.BeginTrans">
+            <summary>
+            执行事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.ComitTrans">
+            <summary>
+            提交事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.RoolbackTrans">
+            <summary>
+            事务回滚
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.ExecuteSql(System.String)">
+            <summary>
+            执行SQL
+            </summary>
+            <param name="SQL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.ExecuteSql(System.String,System.Collections.Hashtable)">
+            <summary>
+            执行SQL语句
+            </summary>
+            <param name="SQL"></param>
+            <param name="parms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.GetDataSet(System.String)">
+            <summary>
+            获取DataSet
+            </summary>
+            <param name="SQL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.GetDataSet(System.String,System.Collections.Hashtable)">
+            <summary>
+            获取DataSet
+            </summary>
+            <param name="SQL"></param>
+            <param name="parms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OraDataAccess.Dispose">
+            <summary>
+            释放连接
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.OraDataAccess.ErrMessages">
+            <summary>
+            当出现错误时返回错误提示字符串
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.OraDataAccess.ActiveCN">
+            <summary>
+            返回当前数据联接
+            </summary>
+        </member>
+        <member name="E:Sourcesoft.OraDataAccess.OnProgress">
+            <summary>
+            Insert和Update表时处理事件
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.ButtonEx">
+            <summary>
+            弹出确认消息框的按钮
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.ButtonEx.#ctor">
+            <summary>
+            扩展按钮构成
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.ButtonEx.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            重写客户呈现
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.ButtonEx.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            重写按钮属性
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.ButtonEx.OnPreRender(System.EventArgs)">
+            <summary>
+            设置脚本
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:Sourcesoft.ExControls.ButtonEx.ButtonType">
+            <summary>
+            按钮类型属性
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.ButtonEx.Message">
+            <summary>
+            用于提交前显示的message
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.ButtonEx.ValueName">
+            <summary>
+            用于基于单项查询时需要的数据名称
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.ButtonEx.ValueField">
+            <summary>
+            用于基于单项查询时需要的传递值的字段用'_'分隔表和字段如果不存在表则直接用字段名
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.ButtonEx.EnabledField">
+            <summary>
+            设置或获取控制是否可用的数据字段
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.ButtonEx.ButtonTypes">
+            <summary>
+            按钮类别
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.ButtonEx.ButtonTypes.Normal">
+            <summary>
+            标准按钮
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.ButtonEx.ButtonTypes.SingleSearch">
+            <summary>
+            单一文本框查询
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.TextBoxEx">
+            <summary>
+            扩展文本框的现有功能，包括数据校验等
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TextBoxEx.#ctor">
+            <summary>
+            构成
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TextBoxEx.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            为文本框生成页面事件 
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TextBoxEx.OnPreRender(System.EventArgs)">
+            <summary>
+            为文本框生成页面脚本
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TextBoxEx.OnTextChanged(System.EventArgs)">
+            <summary>
+            焦点回到当前文本框
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TextBoxEx.SaveViewState">
+            <summary>
+            增加值获取
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TextBoxEx.LoadViewState(System.Object)">
+            <summary>
+            获取传递回来的文本框的值
+            </summary>
+            <param name="savedState"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TextBoxEx.HasControls">
+            <summary>
+            用于下拉列表的显示而自定义子控件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TextBoxEx.RaisePostDataChangedEvent">
+            <summary>
+            处理数据更改事件
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TextBoxEx.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            处理数据回发
+            </summary>
+            <param name="postDataKey"></param>
+            <param name="postCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TextField">
+            <summary>
+            用于加载文本框所显示数据的字段名
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.ValueField">
+            <summary>
+            用于加载文本框所显示数据的对应的真实值字段名
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.Value">
+            <summary>
+            定义存储数据属性
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TextTable">
+            <summary>
+            定义显示数据表属性
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.SendTab">
+            <summary>
+            是否将回车键转换为制表符
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.UpCase">
+            <summary>
+            自动转换为大写字母
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.ClientValue">
+            <summary>
+            允许客户端获取字段的值,用于单项查询时用，可以用Get[TextField]的模式获取客户端数据。
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.Computing">
+            <summary>
+            用于当页计算表达式
+            </summary>
+            <example>
+            A = B + C
+            这个例子会在页面中按照SetAValue(GetBValue + GetCValue) 的方法将B,C字段所在的文本框的值加起来写入A字段所在的文本框
+            </example>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.EnabledField">
+            <summary>
+            设置或获取控制是否可用的数据字段
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.OtherCheck">
+            <summary>
+            其他检查字段
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.DataCheck">
+            <summary>
+            定义数据校验的属性
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.ErrMessage">
+            <summary>
+            定义数据校验错误的提示信息
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.AlertColor">
+            <summary>
+            用于处理出错时更换文本框背景颜色
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.XML">
+            <summary>
+            用于数据字典的XML文件
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.CheckTableName">
+            <summary>
+            用于从连接取到数据的视图或表名
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.CheckName">
+            <summary>
+            用于字典的名称，为了用于xml时可以使用同一字典不同结果
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.CheckField">
+            <summary>
+            用于做字典检查数据的字段名
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.ShowField">
+            <summary>
+            用于显示字典结果的字段名
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.SaveField">
+            <summary>
+            从数据字典中取得用于保存到值的字段
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.CheckExists">
+            <summary>
+            是否检查数据存在，与字典功能相反
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.ForceCheck">
+            <summary>
+            是否强制检测数据字典,若true则当数据不匹配的时候显示ErrMessage，若存在AlertColor则对应的文本变为AlertColor
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.FromValueField">
+            <summary>
+            用于处理多项字典
+            如果页面中有字典的ShowField为多项的时候会利用这个设置所设置的字典中子段名称将字典的结果按照值的方式写入这个文本框
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.FromTextField">
+            <summary>
+            用于处理多项字典
+            如果页面中有字典的ShowField为多项的时候会利用这个设置所设置的字典中子段名称将字典的结果按照显示文本的方式写入这个文本框
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TooltipHighlight">
+            <summary>
+            用于设置ToolTip选中的CSS
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TooltipCss">
+            <summary>
+            用于设置ToolTip的CSS
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TooltipShortcut">
+            <summary>
+            用于显示Tooltip快捷键
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TooltipSource">
+            <summary>
+            用于显示Tooltip的XML数据源
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TooltipColumns">
+            <summary>
+            用于显示Tooltip的列,使用","分隔,第一列做为检查列，点击下拉列表的时候根据第一列查询字典中的值
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TooltipHeader">
+            <summary>
+            用于显示Tooltip的列标题,使用","分隔
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TooltipTable">
+            <summary>
+            用于显示Tooltip的视图
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.TooltipLines">
+            <summary>
+            下拉列表行数
+            </summary>
+            <example>可以使用数字和%</example>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.AutoDropDown">
+            <summary>
+            自动下拉列表
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.TextBoxEx.Text">
+            <summary>
+            重载文本设置，用于重设日期格式
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.TextBoxEx.RegExp">
+            <summary>
+            检查类型
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.None">
+            <summary>
+            不用校验
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.E_Mail">
+            <summary>
+            电子邮件
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.URL">
+            <summary>
+            超级连接
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.ID_card">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.PostalCode">
+            <summary>
+             邮政编码
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.DateTime">
+            <summary>
+            日期格式
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.IP">
+            <summary>
+            IP地址
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.Password">
+            <summary>
+            密码字符
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.LoginID">
+            <summary>
+            登录用户名
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.Numeric">
+            <summary>
+            数字型
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.Telphone">
+            <summary>
+            电话号码
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.Mobile">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.RegExp.Dics">
+            <summary>
+            来自于字典
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.TextBoxEx.Keys">
+            <summary>
+            设置键
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.LButton">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.RButton">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Cancel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.MButton">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.XButton1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.XButton2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Back">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Tab">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.LineFeed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Clear">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Enter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.ShiftKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.ControlKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Menu">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Pause">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.CapsLock">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Capital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.KanaMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.HanguelMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.HangulMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.JunjaMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.FinalMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.KanjiMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.HanjaMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Escape">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.IMEConvert">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.IMENonconvert">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.IMEAceept">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.IMEModeChange">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Space">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.PageUp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Prior">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.PageDown">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Home">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Left">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Right">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Print">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Execute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.PrintScreen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Snapshot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Insert">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Delete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Help">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D9">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.A">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.B">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.C">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.D">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.E">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.G">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.H">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.I">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.J">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.K">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.L">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.M">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.N">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.O">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.P">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Q">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.R">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.S">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.T">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.U">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.V">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.W">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Z">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.LWin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.RWin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Apps">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumPad9">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Multiply">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Add">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Separator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Subtract">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Divide">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F6">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F9">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F10">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F11">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F12">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F13">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F14">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F15">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F16">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F17">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F18">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F19">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F20">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F21">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F22">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F23">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.F24">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NumLock">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Scroll">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.LShiftKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.RShiftKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.LControlKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.RControlKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.LMenu">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.RMenu">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.BrowserBack">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.BrowserForward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.BrowserRefresh">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.BrowserStop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.BrowserSearch">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.BrowserFavorites">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.BrowserHome">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.VolumeMute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.VolumeDown">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.VolumeUp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.MediaNextTrack">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.MediaPreviousTrack">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.MediaStop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.MediaPlayPause">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.LaunchMail">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.SelectMedia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.LaunchApplication1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.LaunchApplication2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemSemicolon">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Oemplus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Oemcomma">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemMinus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemPeriod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemQuestion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Oemtilde">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemOpenBrackets">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemPipe">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemCloseBrackets">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemQuotes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Oem8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemBackslash">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.ProcessKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Attn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Crsel">
+            <summary>
+            
+            </summary>
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Exsel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.EraseEof">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Play">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Zoom">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.NoName">
+            <summary>
+            
+            </summary>
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Pa1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.OemClear">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.KeyCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Shift">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Control">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Alt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.TextBoxEx.Keys.Modifiers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Nordasoft.ExcelTemplate">
+            <summary>
+            Class1 的摘要说明。
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.CheckBoxEx">
+            <summary>
+            扩展CheckBox
+            用于自动处理在Grid中的Check问题。
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.CheckBoxEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.CheckBoxEx.OnPreRender(System.EventArgs)">
+            <summary>
+            处理CheckBox在DataGridHead中选择时更新当列所有CheckBox
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.CheckBoxEx.OnDataBinding(System.EventArgs)">
+            <summary>
+             处理CheckBox在DataGridHead中选择时更新当列所有CheckBox
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:Sourcesoft.ExControls.CheckBoxEx.ValueTable">
+            <summary>
+            Check所对应的表
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.CheckBoxEx.ValueField">
+            <summary>
+            Check所对应的字段
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.CheckBoxEx.EnabledField">
+            <summary>
+            设置或获取控制是否可用的数据字段
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.CheckBoxEx.GridCheckAll">
+            <summary>
+            设置或获取使用该CheckBox设置DataGrid的CheckAll属性
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.OleDataAccess">
+            <summary>
+            通用数据访问
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="cnString">用于数据联接的字符串</param>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.GetTable(System.String)">
+            <summary>
+            获取数据表
+            </summary>
+            <param name="SQL">用于获取数据表的SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.GetTable(System.String,System.Collections.Hashtable)">
+            <summary>
+            获取数据表
+            </summary>
+            <param name="SQL">用于获取数据表的SQL语句</param>
+            <param name="parms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Insert(System.String,System.Data.DataRow)">
+            <summary>
+            新增一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns>返回当前新增的数据索引</returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Insert(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            新增一条纪录
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns>返回当前新增的数据索引</returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Update(System.String,System.Data.DataRow)">
+            <summary>
+            更新一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Update(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            更新一条纪录
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Insert(System.String,System.Data.DataTable)">
+            <summary>
+            按照整个表做新增动作
+            </summary>
+            <param name="TableName">用于新增纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <returns>返回插入的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Update(System.String,System.Data.DataTable)">
+            <summary>
+            按照整个表做更新动作
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <returns>返回被更新的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Update(System.String,System.Data.DataTable,System.String)">
+            <summary>
+            按照整个表做更新动作
+            </summary>
+            <param name="TableName">用于更新纪录的数据库表名</param>
+            <param name="Data">数据表</param>
+            <param name="IndxField">数据的索引列</param>
+            <returns>返回被更新的行数</returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Delete(System.String,System.Data.DataRow)">
+            <summary>
+            删除一条纪录默认索引字段为Indx
+            </summary>
+            <param name="TableName">用于删除纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <returns>返回是否删除成功</returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Delete(System.String,System.Data.DataRow,System.String)">
+            <summary>
+            删除一条纪录
+            </summary>
+            <param name="TableName">用于删除纪录的数据库表名</param>
+            <param name="Data">数据纪录</param>
+            <param name="IndxField">索引字段</param>
+            <returns>返回是否删除成功</returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Despose">
+            <summary>
+            析构
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Break">
+            <summary>
+            强制终止按表添加和更新
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.BeginTrans">
+            <summary>
+            开始一个事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.ComitTrans">
+            <summary>
+            提交事务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.RoolbackTrans">
+            <summary>
+            事务回滚
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.ExecuteSql(System.String)">
+            <summary>
+            执行SQL语句
+            </summary>
+            <param name="SQL">需要执行的SQL</param>
+            <returns>Bool值返回是否执行成功</returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.ExecuteSql(System.String,System.Collections.Hashtable)">
+            <summary>
+            执行SQL语句
+            </summary>
+            <param name="SQL">需要执行的SQL</param>
+            <param name="parms">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.GetDataSet(System.String)">
+            <summary>
+            返回一个DataSet
+            </summary>
+            <param name="SQL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.GetDataSet(System.String,System.Collections.Hashtable)">
+            <summary>
+            返回一个DataSet
+            </summary>
+            <param name="SQL"></param>
+            <param name="parms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.OleDataAccess.Dispose">
+            <summary>
+            析构，释放资源和连接
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.OleDataAccess.ErrMessages">
+            <summary>
+            当出现错误时返回错误提示字符串
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.OleDataAccess.ActiveCN">
+            <summary>
+            返回当前数据联接
+            </summary>
+        </member>
+        <member name="E:Sourcesoft.OleDataAccess.OnProgress">
+            <summary>
+            Insert和Update表时处理事件
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.InnerWindow">
+            <summary>
+            在窗体内显示的弹出窗
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.InnerWindow.#ctor(System.String)">
+            <summary>
+            构造函数
+            生成标题行和窗体
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.InnerWindow.OnPreRender(System.EventArgs)">
+            <summary>
+            输出控制脚本
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:Sourcesoft.ExControls.PagerMode">
+            <summary>
+            换页模式
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.PagerMode.NextPrev">
+            <summary>
+            基本上下页
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.PagerMode.NumericPages">
+            <summary>
+            数字换页模式
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.PagerMode.GotoPages">
+            <summary>
+            自定义用GoTo模式
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.PagerMode.DoubleGoto">
+            <summary>
+            左右显示GOTO模式
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.DataGridEx">
+            <summary>
+            扩展DataGrid增加换页命令和自动数据处理模块
+            </summary>
+        </member>
+        <member name="F:Sourcesoft.ExControls.DataGridEx._DeleteMessage">
+            <summary>
+            设置换页文本框
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.#ctor">
+            <summary>
+            构成函数
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.CreateSearch">
+            <summary>
+            生成查询行
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.OnPreRender(System.EventArgs)">
+            <summary>
+            是否显示查找行
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            重写Reder方法，用于添加颜色变量
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.OnItemDataBound(System.Web.UI.WebControls.DataGridItemEventArgs)">
+            <summary>
+            重写数据绑定方法用于增加变色方法
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.AddGoto(System.Web.UI.ControlCollection,System.Int32)">
+            <summary>
+            添加自定义分页控件
+            </summary>
+            <param name="cellControls"></param>
+            <param name="currtxt">当前Goto文本框</param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.OnItemCreated(System.Web.UI.WebControls.DataGridItemEventArgs)">
+            <summary>
+            重写行设置
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.OnPageIndexChanged(System.Web.UI.WebControls.DataGridPageChangedEventArgs)">
+            <summary>
+            重写换页命令
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.OnDataBinding(System.EventArgs)">
+            <summary>
+            对保留值保存到ViewState并更新对应的字段
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.DataBind">
+            <summary>
+            当绑定时强制绑定查找行
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.DataGridEx.OnInit(System.EventArgs)">
+            <summary>
+            解决重定向后换页问题
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.FilterHeaderText">
+            <summary>
+            设置和获取序号列标题
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.SeqHeaderText">
+            <summary>
+            设置和获取序号列标题
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.CountRows">
+            <summary>
+            设置和获取共计文本
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.CheckAll">
+            <summary>
+            设置和获取是否全选
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.AutoChangePage">
+            <summary>
+            根据DataSet自动换页
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.KeepColumns">
+            <summary>
+            换页后可保持值的列
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.CleanKeep">
+            <summary>
+            可设定清除保留的数据
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.CssJump">
+            <summary>
+            定义页脚中跳转框的CSS属性
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.CssGoTo">
+            <summary>
+            定义页脚中跳转框的CSS属性。
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.MouseOnCSS">
+            <summary>
+            定义当鼠标移动到某一行时的颜色。
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.ColorMouseOn">
+            <summary>
+            定义当鼠标移动到某一行时的颜色。
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.ConditionColor">
+            <summary>
+            定义根据条件所更改的行的颜色
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.ColorCondition">
+            <summary>
+            定义更改行颜色的条件
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.DeleteMessage">
+            <summary>
+            定义删除时的提示信息
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.NewPagerStyle">
+            <summary>
+            导航页风格
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.ShowSearch">
+            <summary>
+            设置和获取是否显示查询行
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.SearchTable">
+            <summary>
+            查询用的表
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.SearchCss">
+            <summary>
+            查询文本框的CssClass
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.DataGridEx.SearchRowCss">
+            <summary>
+            查询行Css
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.ExControls.PagerStyleEx">
+            <summary>
+            扩展分页风格
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.PagerStyleEx.#ctor">
+            <summary>
+            构成
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.JumpToText">
+            <summary>
+            跳转文本提示信息
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.Mode">
+            <summary>
+            分页类型
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.FirstPageText">
+            <summary>
+            首页文本
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.PrevPageText">
+            <summary>
+            上一页文本
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.NextPageText">
+            <summary>
+            下一页文本
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.LastPageText">
+            <summary>
+            尾页文本
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.PageButtonCount">
+            <summary>
+            获取或设置在 DataGrid 控件的页导航元素中同时显示的数值按钮的数目
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.Visible">
+            <summary>
+            显示页导航
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.CssJump">
+            <summary>
+            跳转页文本框风格
+            </summary>
+        </member>
+        <member name="P:Sourcesoft.ExControls.PagerStyleEx.CssGoTo">
+            <summary>
+            跳转页按钮风格
+            </summary>
+        </member>
+        <member name="T:Sourcesoft.Ado">
+            <summary>
+            ADO 2.7 TO ADO 2.6
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.Ado.#ctor">
+            <summary>
+            Create ADO
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.Ado.GetADOXML(System.Data.DataTable)">
+            <summary>
+            Static Function
+            ADO 2.7 Table To ADO 2.6 XML
+            </summary>
+            <param name="source">ADO 2.7 Table</param>
+            <returns>ADO 2.6 XML</returns>
+        </member>
+        <member name="T:Sourcesoft.ExControls.TooltipEx">
+            <summary>
+            扩展Tootip
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TooltipEx.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.ExControls.TooltipEx.OnPreRender(System.EventArgs)">
+            <summary>
+            设置数据注册显示和隐藏的脚本
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:Sourcesoft.DataEncoder">
+            <summary>
+            DataEncoder 的摘要说明。
+            </summary>
+        </member>
+        <member name="M:Sourcesoft.DataEncoder.EncodeData(System.Byte[])">
+            <summary>
+            加密数据
+            </summary>
+            <param name="buffer">需要加密的数据</param>
+            <returns>加过密的数据</returns>
+        </member>
+        <member name="M:Sourcesoft.DataEncoder.DecodeData(System.Byte[])">
+            <summary>
+            解密数据
+            </summary>
+            <param name="buffer">已经加密的数据</param>
+            <returns>解密的数据</returns>
+        </member>
+        <member name="M:Sourcesoft.DataEncoder.EncodeString(System.String)">
+            <summary>
+            加密字符串
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sourcesoft.DataEncoder.DecodeString(System.String)">
+            <summary>
+            解密Base64字符串
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
